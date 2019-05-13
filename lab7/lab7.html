@@ -1,0 +1,120 @@
+<html>
+<head>
+<title>Chapter 10</title>
+<link rel="stylesheet" href="lab7.css">
+<script src=".\jquery.js"></script>
+</head>
+<body class="tiled" onload = "reset()">
+<header>
+    <h1>Art Filters</h1>
+</header>
+<main>
+    <div id="sliderBox">
+        <form>
+           <p><label>Opacity: </label>
+             <input type="range" id="sliderOpacity" min="0" max="100" value="100" class="sliders"  autocomplete="off"/> <span id="numOpacity">100</span>%</p>
+
+           <p><label>Saturation: </label>
+             <input type="range" id="sliderSaturation" min="1" max="300" value="100" class="sliders"  autocomplete="off"/> <span id="numSaturation">100</span>%</p>
+
+           <p><label>Brightness: </label>
+             <input type="range" id="sliderBrightness" min="0" max="300" value="100" class="sliders"  autocomplete="off"/> <span id="numBrightness">100</span>%</p>
+
+           <p><label>Hue Rotate: </label>
+             <input type="range" id="sliderHue" min="0" max="360" value="0" class="sliders"  autocomplete="off"/> <span id="numHue">0</span>deg</p>
+
+           <p><label>Grayscale: </label>
+             <input type="range" id="sliderGray" min="0" max="100" value="0" class="sliders"  autocomplete="off"/> <span id="numGray">0</span>%</p>
+
+           <p><label>Blur: </label>
+             <input type="range" id="sliderBlur" min="0" max="10" value="0" class="sliders"  autocomplete="off"/> <span id="numBlur">0</span>px</p>
+
+           <p><button id="resetFilters">Reset</button> </p>
+        </form>
+    </div>
+    <figure id="imgManipulated">
+        <img src="images/medium/painting1.jpg" >
+        <figcaption>
+            <em>Still Life with Flowers in a Glass Vase</em> <br>
+            Jan Davidsz. de Heem, 1650 - 1683
+        </figcaption>
+    </figure>
+    <div id="thumbBox">
+        <div><img src="images/small/painting1.jpg"  alt="Still Life with Flowers in a Glass Vase" title="Jan Davidsz. de Heem, 1650 - 1683"/></div>
+        <div><img src="images/small/painting2.jpg"  alt="Portrait of Alida Christina Assink" title="Jan Adam Kruseman, 1833"/></div>
+        <div><img src="images/small/painting3.jpg"  alt="Self-portrait" title="Vincent van Gogh, 1887"/></div>
+        <div><img src="images/small/painting4.jpg"  alt="William II, Prince of Orange, and his Bride, Mary Stuart" title="Anthony van Dyck, 1641"/></div>
+        <div><img src="images/small/painting5.jpg"  alt="Milkmaid" title="Johannes Vermeer, c. 1660"/></div>
+    </div>
+</main>
+<script>
+  $(document).ready(function(){
+
+    $("#thumbBox img").click(function(){
+      var src = $(this).attr("src");
+      src = src.replace('small','medium')
+      $("#imgManipulated img").attr("src", src);
+      $("#imgManipulated figcaption").html(" ");
+      $("#imgManipulated figcaption").append("<em>"+$(this).attr("alt")+"<em>");
+      $("#imgManipulated figcaption").append("<br>"+$(this).attr('title'));
+    });
+//slider
+  //reset
+  function reset(){
+    $("#imgManipulated img").attr("style", "-webkit-filter:none;filter:none;");
+  }
+  $("#sliderBox #resetFilters").click(reset());
+  //sliderBox
+  setInterval(function() {
+      $("#numOpacity").text($("#sliderOpacity").val());
+  }, 1);
+
+  setInterval(function() {
+      $("#numSaturation").text($("#sliderSaturation").val());
+  }, 1);
+
+  setInterval(function() {
+      $("#numBrightness").text($("#sliderBrightness").val());
+  }, 1);
+  setInterval(function() {
+      $("#numHue").text($("#sliderHue").val());
+  }, 1);
+  setInterval(function() {
+      $("#numGray").text($("#sliderGray").val());
+  }, 1);
+  setInterval(function() {
+      $("#numBlur").text($("#sliderBlur").val());
+  }, 1);
+
+  // $("#sliderOpacity").change(function() {
+  //   $("#imgManipulated img").attr("style","-webkit-filter :opacity("+$("#sliderOpacity").val()+"%);filter :opacity("+$("#sliderOpacity").val()+"%);");
+  // });
+    $("#sliderOpacity").change(function() {
+    $("#imgManipulated img").attr("style","-webkit-filter :opacity("+$("#sliderOpacity").val()+"%) saturate("+$("#sliderSaturation").val()+"%) brightness("+$("#sliderBrightness").val()+"%) hue-rotate("+$("#sliderHue").val()+"deg) grayscale("+$("#sliderGray").val()+"%) blur("+ $("#sliderBlur").val() +"px);filter :opacity("+$("#sliderOpacity").val()+"%) saturate("+$("#sliderSaturation").val()+"%) brightness("+$("#sliderBrightness").val()+"%) hue-rotate("+$("#sliderHue").val()+"deg) grayscale("+$("#sliderGray").val()+"%) blur("+ $("#sliderBlur").val() +"px);");
+  });
+
+    $("#sliderSaturation").change(function() {
+    $("#imgManipulated img").attr("style","-webkit-filter :opacity("+$("#sliderOpacity").val()+"%) saturate("+$("#sliderSaturation").val()+"%) brightness("+$("#sliderBrightness").val()+"%) hue-rotate("+$("#sliderHue").val()+"deg) grayscale("+$("#sliderGray").val()+"%) blur("+ $("#sliderBlur").val() +"px);filter :opacity("+$("#sliderOpacity").val()+"%) saturate("+$("#sliderSaturation").val()+"%) brightness("+$("#sliderBrightness").val()+"%) hue-rotate("+$("#sliderHue").val()+"deg) grayscale("+$("#sliderGray").val()+"%) blur("+ $("#sliderBlur").val() +"px);");
+  });
+
+    $("#sliderBrightness").change(function() {
+    $("#imgManipulated img").attr("style","-webkit-filter :opacity("+$("#sliderOpacity").val()+"%) saturate("+$("#sliderSaturation").val()+"%) brightness("+$("#sliderBrightness").val()+"%) hue-rotate("+$("#sliderHue").val()+"deg) grayscale("+$("#sliderGray").val()+"%) blur("+ $("#sliderBlur").val() +"px);filter :opacity("+$("#sliderOpacity").val()+"%) saturate("+$("#sliderSaturation").val()+"%) brightness("+$("#sliderBrightness").val()+"%) hue-rotate("+$("#sliderHue").val()+"deg) grayscale("+$("#sliderGray").val()+"%) blur("+ $("#sliderBlur").val() +"px);");
+  });
+
+    $("#sliderHue").change(function() {
+    $("#imgManipulated img").attr("style","-webkit-filter :opacity("+$("#sliderOpacity").val()+"%) saturate("+$("#sliderSaturation").val()+"%) brightness("+$("#sliderBrightness").val()+"%) hue-rotate("+$("#sliderHue").val()+"deg) grayscale("+$("#sliderGray").val()+"%) blur("+ $("#sliderBlur").val() +"px);filter :opacity("+$("#sliderOpacity").val()+"%) saturate("+$("#sliderSaturation").val()+"%) brightness("+$("#sliderBrightness").val()+"%) hue-rotate("+$("#sliderHue").val()+"deg) grayscale("+$("#sliderGray").val()+"%) blur("+ $("#sliderBlur").val() +"px);");
+  });
+
+    $("#sliderGray").change(function() {
+    $("#imgManipulated img").attr("style","-webkit-filter :opacity("+$("#sliderOpacity").val()+"%) saturate("+$("#sliderSaturation").val()+"%) brightness("+$("#sliderBrightness").val()+"%) hue-rotate("+$("#sliderHue").val()+"deg) grayscale("+$("#sliderGray").val()+"%) blur("+ $("#sliderBlur").val() +"px);filter :opacity("+$("#sliderOpacity").val()+"%) saturate("+$("#sliderSaturation").val()+"%) brightness("+$("#sliderBrightness").val()+"%) hue-rotate("+$("#sliderHue").val()+"deg) grayscale("+$("#sliderGray").val()+"%) blur("+ $("#sliderBlur").val() +"px);");
+  });
+
+    $("#sliderBlur").change(function() {
+    $("#imgManipulated img").attr("style","-webkit-filter :opacity("+$("#sliderOpacity").val()+"%) saturate("+$("#sliderSaturation").val()+"%) brightness("+$("#sliderBrightness").val()+"%) hue-rotate("+$("#sliderHue").val()+"deg) grayscale("+$("#sliderGray").val()+"%) blur("+ $("#sliderBlur").val() +"px);filter :opacity("+$("#sliderOpacity").val()+"%) saturate("+$("#sliderSaturation").val()+"%) brightness("+$("#sliderBrightness").val()+"%) hue-rotate("+$("#sliderHue").val()+"deg) grayscale("+$("#sliderGray").val()+"%) blur("+ $("#sliderBlur").val() +"px);");
+  });
+
+
+  });
+</script>
+</body>
+</html>
